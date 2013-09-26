@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# this pre-commit script uses compass to compile stylesheet partials
+
+compass compile 
+wait $!
+git add css/*
