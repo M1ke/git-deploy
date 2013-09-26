@@ -23,7 +23,7 @@ For other systems please see the [GitHub setup guide](https://help.github.com/ar
 
 Once you have a git repository run the following command
 
-    sh install.sh $1 $2 $3
+    sh git-deploy.sh $1 $2 $3
 
 Where
 
@@ -41,7 +41,7 @@ __Remove a remote__
 
 Just run `git remote rm remote-name` to remove a remote. You can handle deletion of the files separately.
 
-#### Old instructions before install.sh
+#### Old instructions before shell script
 
 * Copy whole directory including `.git` to `/var/www` or `user@server:/var/www`.
 * Run `git remote add "remote-name" "remote-dir"/.git`
