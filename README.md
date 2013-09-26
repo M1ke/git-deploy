@@ -2,6 +2,8 @@
 
 Simple setup for deploying to remote repositories. These can be used for local testing, staging or deployment.
 
+The `git-hooks-post-update` script that does the real magic in this setup was not written by me. The code can be found on various Stackoverflow questions and GitHub repositories so I am unsure of its original source. This script merely helps automate the process and provides some instruction around it. I plan to further add to this to carry out other common tasks such as `compass compile` or `jekyll build`.
+
 ### Initialise git
 
 If you haven't already got a git repository, start here. You'll need git installed on both your local machine _and your server_. On Debian based systems run
