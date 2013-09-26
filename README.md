@@ -19,10 +19,17 @@ For other systems please see the [GitHub setup guide](https://help.github.com/ar
 
 ### Install to remote
 
-Once you have a git repository follow the instructions below.
+Once you have a git repository run the following command
 
-* Run `sh install.sh $1 $2` where `$1` is the directory you wish to copy to. This directory must not exist, do not use a trailing slash. Use `$2` for the name of your remote for `git push`
-* Now running `git push remote-name` in your development directory will deploy to your remote repo.
+    sh install.sh $1 $2 $3
+
+Where
+
+* `$1` is the directory you wish to copy to. This directory must not exist, do not use a trailing slash.
+* `$2` us the name of your remote for `git push`
+* `$3` is optional and is for deploying to a networked server, e.g. `user@domain.com`
+
+Assuming the installation runs succesfull you can now run `git push $2` (same as $2 in the list above) in your development directory and it will deploy to your remote repo.
 
 __For SSH connections__
 
