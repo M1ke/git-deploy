@@ -1,6 +1,8 @@
 #!/bin/bash
 
 dir=$1
+name=$2
+
 # If we are using a remote server we need the trailing colon for copy operations
 if [ $# -eq 3 ]; then
 	host=$3':'
@@ -21,4 +23,4 @@ else
 	chmod +x $dir/.git/hooks/post-update
 fi
 # Add the remote using git bash
-git remote add $2 $1/.git
+git remote add $name $host$dir/.git
