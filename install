@@ -1,0 +1,6 @@
+#!/bin/bash
+
+chmod +x git-build-setup
+ln -s `pwd`/git-build-setup /usr/local/bin/git-build-setup
+chmod +x git-deploy-setup
+ln -s `pwd`/git-deploy-setup /usr/local/bin/git-deploy-setup

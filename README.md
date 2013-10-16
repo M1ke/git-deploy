@@ -4,6 +4,12 @@ Simple setup for deploying to remote repositories. These can be used for local t
 
 The `git-hooks-post-update` script that does the real magic in this setup was not written by me. The code can be found on various Stackoverflow questions and GitHub repositories so I am unsure of its original source. This script merely helps automate the process and provides some instruction around it. I plan to further add to this to carry out other common tasks such as `compass compile` or `jekyll build`.
 
+### Install
+
+Run `sh install` to symlink the two `git-` files to your `/usr/local/bin` directory. It will also make them executable.
+
+Once installed you can run `git-deploy-setup` or `git-build-setup` inside any repository.
+
 ### Initialise git
 
 If you haven't already got a git repository, start here. You'll need git installed on both your local machine _and your server_. On Debian based systems run
@@ -23,9 +29,9 @@ For other systems please see the [GitHub setup guide](https://help.github.com/ar
 
 Once you have a git repository run the following command
 
-    sh git-deploy.sh $1 $2 $3
+    git-deploy-setup $1 $2 $3
 
-Where
+Where:
 
 * `$1` is the directory you wish to copy to. This directory must not exist, do not use a trailing slash.
 * `$2` us the name of your remote for `git push`
@@ -46,8 +52,8 @@ Just run `git remote rm remote-name` to remove a remote. You can handle deletion
 * Copy whole directory including `.git` to `/var/www` or `user@server:/var/www`.
 * Run `git remote add "remote-name" "remote-dir"/.git`
 * Switch to the remote directory
-* Copy `git-remote-config` to `.git/config`
-* Copy `git-hooks-post-update` to `.git/hooks/post-update`
+* Copy `scripts/git-remote-config` to `.git/config`
+* Copy `scripts/git-hooks-post-update` to `.git/hooks/post-update`
 * Run `chmod +x .git/hooks/post-update` 
 * Now running `git push remote-name` in your development directory will deploy to your remote repo.
 

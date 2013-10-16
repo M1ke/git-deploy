@@ -1,6 +1,16 @@
 #!/bin/bash
 
-SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Find out local directory; can't be abstracted as for that we'd need to know the local directory!
+# Taken from http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  SCRIPT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$SCRIPT/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+SCRIPT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+# END
+
 DIR=$1
 NAME=$2
 
@@ -9,6 +19,7 @@ if [ $# -eq 3 ]; then
 	HOST=$3':'
 else
 	HOST=''
+	mkdir $HOST$DIR
 fi
 
 # Confirms the directory we're copying to
