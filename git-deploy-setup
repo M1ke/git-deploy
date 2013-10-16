@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR=$1
+NAME=$2
+
+# If we are using a remote server we need the trailing colon for copy operations
+if [ $# -eq 3 ]; then
+	HOST=$3':'
+else
+	HOST=''
+fi
+
+# Confirms the directory we're copying to
+echo $HOST$DIR
+
+# Copy everything
+scp -rp . $HOST$DIR
+# Copy our git files to new locations in the remote .git directory
+scp -rp $SCRIPT/scripts/git-remote-config $HOST$DIR/.git/config
+scp -rp $SCRIPT/scripts/git-hooks-post-update $HOST$DIR/.git/hooks/post-update
+
+# If we're working on a networked server we need to run this command by SSH
+if [ $# -eq 3 ]; then
+	ssh $3 chmod +x $DIR/.git/hooks/post-update
+else
+	chmod +x $DIR/.git/hooks/post-update
+fi
+
+# Add the remote using git bash
+git remote add $NAME $HOST$DIR/.git
