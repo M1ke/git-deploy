@@ -11,6 +11,9 @@
 #
 # To enable this hook, make this file executable by "chmod +x post-update".
 
+# Needed because of how RVM installs gems to your path
+. ~/.bash_profile
+
 git update-server-info
 
 is_bare=$(git config --get --bool core.bare)

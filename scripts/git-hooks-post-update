@@ -83,10 +83,3 @@ then
 		fi
 	done
 fi
-
-TMP=/tmp/git-jekyll
-rm -rf $TMP
-git clone ../ $TMP
-jekyll build -s $TMP -d `head ../_www -n 1`
-rm -rf $TMP
-exit

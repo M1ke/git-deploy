@@ -29,13 +29,14 @@ For other systems please see the [GitHub setup guide](https://help.github.com/ar
 
 Once you have a git repository run the following command
 
-    git-deploy-setup $1 $2 $3
+    git-deploy-setup $1 $2 $3 $4
 
 Where:
 
 * `$1` is the directory you wish to copy to. This directory must not exist, do not use a trailing slash.
 * `$2` us the name of your remote for `git push`
-* `$3` is optional and is for deploying to a networked server, e.g. `user@domain.com`
+* `$3` is optional and is for set up with jekyll. Set this to `jekyll` to use the Jekyll based post-update hook, set to any other value except blank if you need to ignore it but need to use `$4`
+* `$4` is optional and is for deploying to a networked server, e.g. `user@domain.com`
 
 Assuming the installation runs succesfull you can now run `git push $2` (same as $2 in the list above) in your development directory and it will deploy to your remote repo.
 
