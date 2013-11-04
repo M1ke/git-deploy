@@ -15,28 +15,39 @@ DIR=$1
 NAME=$2
 
 # If we are using a remote server we need the trailing colon for copy operations
-if [ $# -eq 3 ]; then
-	HOST=$3':'
+if [ $# -eq 4 ]; then
+	HOST=$4
+	UPLOAD=$HOST':'$DIR
 else
-	HOST=''
-	mkdir $HOST$DIR
+	UPLOAD=$DIR
+	mkdir $UPLOAD
 fi
 
 # Confirms the directory we're copying to
-echo $HOST$DIR
+echo $UPLOAD
+
+# If we have specified Jekyll then we use it here
+if [ "$3" == "jekyll" ]; then
+	HOOK='-jekyll'
+	echo 'Jekyll'
+fi
 
 # Copy everything
-scp -rp . $HOST$DIR
+if [ $# -eq 4 ]; then
+    scp -rp . $UPLOAD
+else
+    git clone . $UPLOAD
+fi
 # Copy our git files to new locations in the remote .git directory
-scp -rp $SCRIPT/scripts/git-remote-config $HOST$DIR/.git/config
-scp -rp $SCRIPT/scripts/git-hooks-post-update $HOST$DIR/.git/hooks/post-update
+scp -rp $SCRIPT/scripts/git-remote-config $UPLOAD/.git/config
+scp -rp $SCRIPT/scripts/git-hooks-post-update$HOOK $UPLOAD/.git/hooks/post-update
 
 # If we're working on a networked server we need to run this command by SSH
-if [ $# -eq 3 ]; then
-	ssh $3 chmod +x $DIR/.git/hooks/post-update
+if [ $# -eq 4 ]; then
+	ssh $HOST chmod +x $DIR/.git/hooks/post-update
 else
 	chmod +x $DIR/.git/hooks/post-update
 fi
 
 # Add the remote using git bash
-git remote add $NAME $HOST$DIR/.git
+git remote add $NAME $UPLOAD/.git

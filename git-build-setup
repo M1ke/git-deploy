@@ -11,5 +11,8 @@ done
 SCRIPT="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 # END
 
+dotfile=".git-pre-commit"
+
 cp $SCRIPT/scripts/git-hooks-pre-commit .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
+cp $SCRIPT/scripts/$dotfile $dotfile
+chmod +x .git/hooks/pre-commit $dotfile

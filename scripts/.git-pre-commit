@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Compass
+
+#compass compile
+#wait $!
+#git add css/*
+
+# JSPP
+
+#jspp-compile
+#wait $!
+#git add js/*
